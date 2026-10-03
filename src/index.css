@@ -1,0 +1,123 @@
+@import 'tailwindcss';
+
+@theme inline {
+  --color-bg: var(--bg);
+  --color-fg: var(--fg);
+  --color-muted: var(--muted);
+  --color-subtle: var(--subtle);
+  --color-faint: var(--faint);
+  --color-line: var(--line);
+  --color-raised: var(--raised);
+  --color-accent: var(--accent);
+  --font-serif: 'Literata Variable', 'Iowan Old Style', Charter, Georgia, serif;
+  --font-sans: 'Inter Variable', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
+}
+
+:root,
+:root[data-theme='light'] {
+  --bg: #f8f7f3;
+  --fg: #1d1c1a;
+  --muted: #6f6b64;
+  --subtle: #a29e96;
+  --faint: #e6e3dc;
+  --line: rgb(29 28 26 / 0.1);
+  --raised: #ffffff;
+  --accent: #c4432a;
+  color-scheme: light;
+}
+:root[data-theme='dark'] {
+  --bg: #131312;
+  --fg: #e9e6df;
+  --muted: #8f8b83;
+  --subtle: #5d5a55;
+  --faint: #252422;
+  --line: rgb(233 230 223 / 0.09);
+  --raised: #1c1b1a;
+  --accent: #ec7a5f;
+  color-scheme: dark;
+}
+:root[data-theme='sepia'] {
+  --bg: #f2e9d8;
+  --fg: #3a2f22;
+  --muted: #7f6d56;
+  --subtle: #ae9b80;
+  --faint: #e4d7bd;
+  --line: rgb(58 47 34 / 0.12);
+  --raised: #f8f1e3;
+  --accent: #b2441f;
+  color-scheme: light;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  transition: background-color 240ms ease, color 240ms ease;
+  overscroll-behavior: none;
+}
+::selection {
+  background: color-mix(in srgb, var(--accent) 25%, transparent);
+}
+:focus-visible {
+  outline: 2px solid color-mix(in srgb, var(--accent) 70%, transparent);
+  outline-offset: 2px;
+  border-radius: 6px;
+}
+button {
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.tabular {
+  font-variant-numeric: tabular-nums;
+}
+
+/* Chrome that fades while reading. */
+.chrome {
+  transition: opacity 500ms ease, transform 500ms ease;
+}
+.chrome[data-hidden='true'] {
+  opacity: 0;
+  pointer-events: none;
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+.animate-in {
+  animation: fade-in 280ms ease both;
+}
+
+@keyframes indeterminate {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(250%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 1ms !important;
+    transition-duration: 1ms !important;
+  }
+}
